@@ -83,3 +83,4 @@ For local testing, use the following steps (assuming you have a local MongoDB in
 3.  **Run the application:** `uvicorn app.main:app --reload`
 
 ## ⚙️ Project Structure
+├── Dockerfile # Containerization and SSL installation ├── requirements.txt # Python dependencies ├── app/ │ ├── main.py # FastAPI initialization and /health/db endpoint │ ├── database.py # MongoDB connection setup using os.getenv │ ├── models.py # Pydantic data models │ └── routes/ │ └── reviews.py # CRUD logic for reviews └── README.md # This documentation file
