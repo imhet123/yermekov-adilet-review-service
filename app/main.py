@@ -72,3 +72,20 @@ async def read_root():
 
     return {"message": "Welcome to the Review Service API. Check /docs for endpoints."}
 
+# app/main.py
+
+# ... (Весь остальной код, включая app.include_router) ...
+
+# === Добавление явного сообщения об эндпоинте в логи ===
+import os
+# Получаем URL из переменной окружения, которую Render сам устанавливает
+RENDER_URL = os.getenv("RENDER_EXTERNAL_URL", "http://127.0.0.1:8000")
+
+# Выводим URL health-check и документации
+print("======================================================")
+print(f"✅ SERVICE IS READY.")
+print(f"✅ HEALTH CHECK: {RENDER_URL}/health/db")
+print(f"✅ API DOCS: {RENDER_URL}/docs")
+print("======================================================")
+
+
