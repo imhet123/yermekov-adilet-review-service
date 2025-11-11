@@ -6,7 +6,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from .database import connect_to_mongo, close_mongo_connection, get_mongo_client, get_database
 
 # ИЗМЕНЕНО: Импортируем ваш роутер для отзывов (предполагаю, что он называется reviews)
-from .routers import reviews 
+from .routes import reviews
 
 # ИЗМЕНЕНО: Инициализация FastAPI приложения
 app = FastAPI(
@@ -71,3 +71,4 @@ async def read_root():
     # ИЗМЕНЕНО:
 
     return {"message": "Welcome to the Review Service API. Check /docs for endpoints."}
+
