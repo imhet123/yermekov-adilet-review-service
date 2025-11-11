@@ -3,7 +3,7 @@ from fastapi import FastAPI, Depends, HTTPException, status
 from motor.motor_asyncio import AsyncIOMotorClient
 
 # Импорт функций для управления БД
-from .db import connect_to_mongo, close_mongo_connection, get_mongo_client, get_database
+from .database import connect_to_mongo, close_mongo_connection, get_mongo_client, get_database
 
 # ИЗМЕНЕНО: Импортируем ваш роутер для отзывов (предполагаю, что он называется reviews)
 from .routers import reviews 
@@ -69,4 +69,5 @@ app.include_router(reviews.router, prefix="/api/v1/reviews", tags=["Reviews"]) #
 async def read_root():
     """Базовый эндпоинт для проверки работы FastAPI."""
     # ИЗМЕНЕНО:
+
     return {"message": "Welcome to the Review Service API. Check /docs for endpoints."}
