@@ -120,3 +120,6 @@ The project setup includes the FastAPI application, `Dockerfile`, and all enviro
     ```
 3.  **Install Dependencies:** `pip install -r requirements.txt`
 4.  **Run the application:** `uvicorn app.main:app --reload`
+
+<img width="1890" height="755" alt="image" src="https://github.com/user-attachments/assets/44ad20a8-1279-4bfa-b032-f950d5ad0f7a" />
+
