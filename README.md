@@ -9,7 +9,6 @@ This project is a **FastAPI** microservice designed to manage **reviews (CRUD)**
 | **GitHub Repository** | `https://github.com/YOUR_NICKNAME/yermekov-adilet-review-service` |
 | **Live Render URL** | `https://YOUR-APP-NAME.onrender.com/` |
 | **Swagger UI (API Docs)** | `https://YOUR-APP-NAME.onrender.com/docs` |
-![Uploading image.png…]()
 
 
 ---
