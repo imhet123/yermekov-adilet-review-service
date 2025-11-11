@@ -14,18 +14,18 @@ This project is a **FastAPI** microservice designed to manage **reviews (CRUD)**
 
 ## ✅ Deployment Criteria Met (Assignment 4)
 
-[cite_start]This project fully meets all requirements of the assignment[cite: 2]:
+This project fully meets all requirements of the assignment:
 
 ### 1. Project Setup & Structure (10 Marks)
 
 * **FastAPI Application:** The core application code is located in the `app/` directory.
-* [cite_start]**Dockerfile:** Present in the root directory for building the container[cite: 49].
+* **Dockerfile:** Present in the root directory for building the container.
 * **Requirements:** `requirements.txt` includes all necessary Python dependencies.
 
 ### 2. Docker Build & SSL Implementation (10 Marks)
 
 * The container builds and runs successfully.
-* [cite_start]**SSL/TLS Handling:** The `Dockerfile` includes the mandatory step to install system certificates, essential for a secure TLS/SSL connection to MongoDB Atlas[cite: 36, 37]:
+* **SSL/TLS Handling:** The `Dockerfile` includes the mandatory step to install system certificates, essential for a secure TLS/SSL connection to MongoDB Atlas:
     ```dockerfile
     RUN apt-get update && \
         apt-get install -y --no-install-recommends ca-certificates openssl && \
@@ -35,23 +35,36 @@ This project is a **FastAPI** microservice designed to manage **reviews (CRUD)**
 
 ### 3. Environment Variables (10 Marks)
 
-[cite_start]All required environment variables are configured **securely** in the Render environment, not exposed in the repository[cite: 31, 35].
+All required environment variables are configured **securely** in the Render environment, not exposed in the repository.
 
 | Variable | Purpose |
 | :--- | :--- |
-| `MONGO_URI` | [cite_start]MongoDB Atlas connection string[cite: 32]. |
-| `DB_NAME` | The name of the target database (`reviewdb`)[cite: 33]. |
-| `JWT_SECRET` | [cite_start]Randomly generated secret key (as required by the assignment)[cite: 34]. |
+| `MONGO_URI` | MongoDB Atlas connection string. |
+| `DB_NAME` | The name of the target database (`reviewdb`). |
+| `JWT_SECRET` | Randomly generated secret key (as required by the assignment). |
 | `MUSIC_SERVICE_URL` | URL of the dependent microservice (e.g., `https://overtone-music.onrender.com/`). |
 
 ### 4. Health Endpoint & MongoDB Connection (25 Marks)
 
-* [cite_start]**Working `/health/db` Endpoint:** Implemented and actively verifies the database connection status by executing a real `ping` command to MongoDB Atlas[cite: 18, 49].
+* **Working `/health/db` Endpoint:** Implemented and actively verifies the database connection status by executing a real `ping` command to MongoDB Atlas.
 * **Test Connection:**
     ```bash
     curl [https://YOUR-APP-NAME.onrender.com/health/db](https://YOUR-APP-NAME.onrender.com/health/db)
     # Expected Result: HTTP 200 OK, {"status": "ok", "message": "Connection successful", ...}
     ```
+---
+
+## 🔗 Available Endpoints
+
+The service provides the following endpoints under the base path `/api/v1/reviews` (for CRUD operations) and general health checks.
+
+| Method | Path | Description |
+| :--- | :--- | :--- |
+| **GET** | `/` | Root endpoint. Returns a welcome message. |
+| **GET** | `/health/db` | **Mandatory Health Check.** Verifies the live connection to MongoDB Atlas. |
+| **POST** | `/api/v1/reviews/` | **Create Review.** Creates a new review. Requires a `track_id` and calls the `music-service` for track data before saving. |
+| **GET** | `/api/v1/reviews/user/{user_id}` | **Read User Reviews.** Retrieves all reviews posted by a specific user. |
+| **GET** | `/api/v1/reviews/track/{track_id}` | **Read Track Reviews.** Retrieves all reviews associated with a specific track ID. |
 
 ---
 
