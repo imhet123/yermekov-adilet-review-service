@@ -85,4 +85,6 @@ For local testing, use the following steps (assuming you have a local MongoDB in
 
 ## ⚙️ Project Structure
 . ├── Dockerfile # Containerization and SSL installation ├── requirements.txt # Python dependencies ├── app/ │ ├── main.py # FastAPI initialization and /health/db endpoint │ ├── database.py # MongoDB connection setup using os.getenv │ ├── models.py # Pydantic data models │ └── routes/ │ └── reviews.py # CRUD logic for reviews └── README.md # This documentation file
+<img width="1913" height="895" alt="image" src="https://github.com/user-attachments/assets/bb79418d-6595-47ab-af4c-779bda2b50ad" />
+
 
