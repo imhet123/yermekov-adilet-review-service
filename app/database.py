@@ -1,38 +1,71 @@
 import os
 from motor.motor_asyncio import AsyncIOMotorClient
 from dotenv import load_dotenv
+from asyncio import TimeoutError as AsyncTimeoutError
 
+# Загружаем переменные окружения (для локального тестирования, Render игнорирует)
 load_dotenv() 
 
-# ИЗМЕНЕНО: Значение по умолчанию для локального запуска (docker-compose)
-MONGO_URI = os.getenv("MONGO_URI", "mongodb://review-mongo:27017") # <-- ИЗМЕНЕНО
+# 1. Получаем строку подключения из переменной окружения
+MONGO_URI = os.getenv("MONGO_URI", "mongodb://review-mongo:27017")
 
-# ИЗМЕНЕНО: Имя БД по умолчанию (например, "reviewdb" или "reviews")
-DB_NAME = os.getenv("DB_NAME", "reviewdb") # <-- ИЗМЕНЕНО
+# 2. Получаем имя базы данных.
+DB_NAME = os.getenv("DB_NAME", "reviewdb")
 
-# Инициализация клиента (Без изменений)
-client = AsyncIOMotorClient(MONGO_URI)
-db = client[DB_NAME]
+# Инициализация клиента
+client = None
+db = None
 
-# ИЗМЕНЕНО: Обновлена проверка для локального запуска
-if MONGO_URI == "mongodb://review-mongo:27017": # <-- ИЗМЕНЕНО
+# Дополнительный тест для проверки, что MONGO_URI был установлен.
+if MONGO_URI == "mongodb://review-mongo:27017":
     print("WARNING: Using local database URI. Ensure MONGO_URI is set in production!")
 
-# Функции get_database и get_mongo_client (предполагаю, они у вас есть)
-# (Если их нет, скопируйте их из music-service)
 
 async def connect_to_mongo():
-    global client
-    # (Ваш код подключения...)
-    print("Connecting to MongoDB...")
+    """Подключается к MongoDB Atlas при старте приложения."""
+    global client, db
+    
+    try:
+        # Устанавливаем таймаут на 5 секунд для проверки соединения
+        client = AsyncIOMotorClient(MONGO_URI, serverSelectionTimeoutMS=5000)
+        
+        # Попытка выполнить простую команду 'ping' для проверки соединения
+        await client.admin.command('ping') 
+        
+        db = client[DB_NAME]
+        print("✅ MongoDB connection successful.")
+        
+    except AsyncTimeoutError:
+        # Специальная обработка для таймаута
+        print("=========================================================================================")
+        print("🛑🛑🛑 ERROR: MONGODB CONNECTION TIMEOUT 🛑🛑🛑")
+        print("Possible causes: MONGO_URI is incorrect or Render's IP is not whitelisted on MongoDB Atlas.")
+        print("=========================================================================================")
+        raise ConnectionError("MongoDB connection timed out.")
+        
+    except Exception as e:
+        # Обработка любых других ошибок подключения
+        print("=========================================================================================")
+        print("🛑🛑🛑 ERROR: FAILED TO CONNECT TO MONGODB ATLAS 🛑🛑🛑")
+        print(f"Details: {e.__class__.__name__}: {e}")
+        print("Check your MONGO_URI and network access settings on Atlas.")
+        print("=========================================================================================")
+        
+        # Важно: мы перевызываем ошибку, чтобы Render корректно зафиксировал сбой старта
+        raise e
+
 
 async def close_mongo_connection():
+    """Закрывает соединение при выключении приложения."""
     global client
-    # (Ваш код отключения...)
-    print("Closing MongoDB connection...")
+    if client:
+        client.close()
+        print("MongoDB connection closed.")
+
 
 def get_mongo_client() -> AsyncIOMotorClient:
     return client
 
-def get_database() -> AsyncIOMotorClient:
+
+def get_database():
     return db
