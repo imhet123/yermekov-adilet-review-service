@@ -8,9 +8,9 @@
 
 | Component | Link |
 | :--- | :--- |
-| **GitHub Repository** | `https://github.com/YOUR_NICKNAME/yermekov-adilet-review-service` |
-| **Live Render URL** | `https://YOUR-APP-NAME.onrender.com/` |
-| **Swagger UI (API Docs)** | `https://YOUR-APP-NAME.onrender.com/docs` |
+| **GitHub Repository** | `imhet123/yermekov-adilet-review-service` |
+| **Live Render URL** | `https://yermekov-adilet-review-service-1.onrender.com` |
+| **Swagger UI (API Docs)** | `https://yermekov-adilet-review-service-1.onrender.com/docs` |
 
 -----
 
@@ -69,7 +69,7 @@ All required environment variables are configured **securely** in the Render das
 **Test Connection:**
 
 ```bash
-curl https://YOUR-APP-NAME.onrender.com/health/db
+curl https://yermekov-adilet-review-service-1.onrender.com/health/db
 # Expected Result: HTTP 200 OK, {"status": "ok", "message": "Connection successful", ...}
 ```
 
