@@ -69,7 +69,7 @@ All required environment variables are configured **securely** in the Render das
 **Test Connection:**
 
 ```bash
-curl [https://yermekov-adilet-review-service-1.onrender.com/health/db](https://yermekov-adilet-review-service-1.onrender.com/health/db)
+curl https://yermekov-adilet-review-service-1.onrender.com/health/db
 # Expected Result: HTTP 200 OK, {"status": "ok", "message": "Connection successful", ...}
 ```
 
