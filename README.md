@@ -8,7 +8,7 @@
 
 | Component | Link |
 | :--- | :--- |
-| **GitHub Repository** | `imhet123/yermekov-adilet-review-service` |
+| **GitHub Repository** | `https://github.com/imhet123/yermekov-adilet-review-service` |
 | **Live Render URL** | `https://yermekov-adilet-review-service-1.onrender.com` |
 | **Swagger UI (API Docs)** | `https://yermekov-adilet-review-service-1.onrender.com/docs` |
 
