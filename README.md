@@ -93,7 +93,7 @@ All CRUD operations are accessible under the base path `/api/v1/reviews`.
 
 This screenshot shows the Render logs with the application successfully started, connecting to MongoDB, and displaying the custom startup message with the live URL.
 
-\<img width="1890" height="755" alt="Render deployment logs" src="https://github.com/user-attachments/assets/44ad20a8-1279-4bfa-b032-f950d5ad0f7a" /\>
+<img width="1890" height="755" alt="image" src="https://github.com/user-attachments/assets/44ad20a8-1279-4bfa-b032-f950d5ad0f7a" />
 
 -----
 
