@@ -1,8 +1,8 @@
-## 🚀 [EN] Review Service Microservice: Render Deployment
+# 🚀 [EN] Review Service Microservice: Render Deployment
 
-[](https://www.google.com/url?sa=E&source=gmail&q=https://YOUR-APP-NAME.onrender.com/)
-[](https://www.mongodb.com/atlas)
-[](https://www.google.com/search?q=LICENSE)
+[![Project Status](https://img.shields.io/badge/Status-Deployed_Live-brightgreen)](https://yermekov-adilet-review-service-1.onrender.com)
+[![Tech Stack](https://img.shields.io/badge/Tech-FastAPI%20%7C%20MongoDB%20%7C%20Docker-blueviolet)](https://www.mongodb.com/atlas)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
 ### 🔗 Project Links
 
@@ -12,7 +12,7 @@
 | **Live Render URL** | `https://yermekov-adilet-review-service-1.onrender.com` |
 | **Swagger UI (API Docs)** | `https://yermekov-adilet-review-service-1.onrender.com/docs` |
 
------
+---
 
 ### ✨ Project Overview
 
@@ -30,13 +30,13 @@ This microservice, built with **FastAPI**, provides CRUD functionality for manag
 | **Containerization** | Docker |
 | **Deployment Platform** | Render |
 
------
+---
 
 ## ✅ Assignment 4 Compliance Report
 
 This project is fully compliant with all grading criteria.
 
-### 1\. 🛡️ Secure Deployment & SSL/TLS (20 Marks)
+### 1. 🛡️ Secure Deployment & SSL/TLS (20 Marks)
 
 | Criterion | Implementation |
 | :--- | :--- |
@@ -49,7 +49,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends ca-certificates openssl && \
     update-ca-certificates && \
     rm -rf /var/lib/apt/lists/*
-```
+````
 
 ### 2\. 🔑 Environment Variables (10 Marks)
 
@@ -69,7 +69,7 @@ All required environment variables are configured **securely** in the Render das
 **Test Connection:**
 
 ```bash
-curl https://yermekov-adilet-review-service-1.onrender.com/health/db
+curl [https://yermekov-adilet-review-service-1.onrender.com/health/db](https://yermekov-adilet-review-service-1.onrender.com/health/db)
 # Expected Result: HTTP 200 OK, {"status": "ok", "message": "Connection successful", ...}
 ```
 
@@ -89,7 +89,17 @@ All CRUD operations are accessible under the base path `/api/v1/reviews`.
 
 -----
 
+## 📸 Deployment Screenshot
+
+This screenshot shows the Render logs with the application successfully started, connecting to MongoDB, and displaying the custom startup message with the live URL.
+
+\<img width="1890" height="755" alt="Render deployment logs" src="https://github.com/user-attachments/assets/44ad20a8-1279-4bfa-b032-f950d5ad0f7a" /\>
+
+-----
+
 ## 💻 Local Development
+
+Follow these steps to set up and run the service locally using a virtual environment or Docker.
 
 ### 1\. Project Structure (10 Marks)
 
@@ -108,18 +118,56 @@ The project setup includes the FastAPI application, `Dockerfile`, and all enviro
 └── README.md                   # This documentation file
 ```
 
-### 2\. Startup Instructions
+### 2\. Local Development Setup (Using Python)
 
-1.  **Clone the repository:** `git clone ...`
-2.  **Create a `.env` file** in the root directory (FOR LOCAL USE ONLY\!):
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/imhet123/yermekov-adilet-review-service.git](https://github.com/imhet123/yermekov-adilet-review-service.git)
+    cd yermekov-adilet-review-service
+    ```
+2.  **Create and activate a virtual environment:**
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate  # On Linux/macOS
+    # venv\Scripts\activate   # On Windows
+    ```
+3.  **Install dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+4.  **Configure Environment Variables:**
+    Create a file named `.env` in the root directory (FOR LOCAL USE ONLY\!):
     ```env
     MONGO_URI="mongodb://localhost:27017"
     DB_NAME="reviewdb"
-    MUSIC_SERVICE_URL="http://127.0.0.1:8001" 
+    MUSIC_SERVICE_URL="[http://127.0.0.1:8001](http://127.0.0.1:8001)" 
     JWT_SECRET="your_local_secret"
     ```
-3.  **Install Dependencies:** `pip install -r requirements.txt`
-4.  **Run the application:** `uvicorn app.main:app --reload`
+5.  **Run the application:**
+    ```bash
+    uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+    ```
+    The API will be available at `http://127.0.0.1:8000`.
 
-<img width="1890" height="755" alt="image" src="https://github.com/user-attachments/assets/44ad20a8-1279-4bfa-b032-f950d5ad0f7a" />
+### 3\. Local Docker Setup
 
+1.  **Build the Docker image:**
+    ```bash
+    docker build -t overtone-review-service .
+    ```
+2.  **Run the container with environment variables:**
+    ```bash
+    docker run -d \
+      -p 8000:8000 \
+      -e MONGO_URI="mongodb+srv://user:password@cluster0.abc.mongodb.net/?appName=Cluster0" \
+      -e DB_NAME="reviewdb" \
+      -e JWT_SECRET="your_very_long_secret_key" \
+      -e MUSIC_SERVICE_URL="[http://127.0.tiny.com](http://127.0.tiny.com)" \
+      overtone-review-service
+    ```
+    The API will be available at `http://127.0.0.1:8000`.
+
+<!-- end list -->
+
+```
+```
